@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Azure Blob Storage Upload</title>
+</head>
+<body>
+    <h1>Upload File to Azure Blob Storage</h1>
+    
+    <form id="uploadForm">
+        <label for="fileInput">Choose file:</label>
+        <input type="file" id="fileInput" name="fileInput" required>
+        <br><br>
+        <button type="button" onclick="uploadFile()">Upload</button>
+    </form>
+ 
+    <p id="status"></p>
+ 
+    <script>
+        async function uploadFile() {
+            const fileInput = document.getElementById('fileInput').files[0];
+ 
+            if (!fileInput) {
+                alert('Please choose a file!');
+                return;
+            }
+ 
+            const sasToken = 'sv=2022-11-02&ss=b&srt=o&sp=rwctfx&se=2024-10-04T21:24:33Z&st=2024-10-04T13:24:33Z&spr=https,http&sig=EVY1EQlOztMI01PxDLSjmOciq83qg8AlQ5FyfWnGrpE%3D';
+            const blobServiceUrl = 'https://pracstorageac.blob.core.windows.net/praccontainer'; // Replace with your Blob service URL
+ 
+            // Create blob service URL and append SAS token
+const uploadUrl = `${blobServiceUrl}/${fileInput.name}?${sasToken}`;
+            
+            try {
+                const response = await fetch(uploadUrl, {
+                    method: 'PUT',
+                    headers: {
+                        'x-ms-blob-type': 'BlockBlob'
+                    },
+                    body: fileInput
+                });
+ 
+                if (response.ok) {
+                    document.getElementById('status').innerText = 'File uploaded successfully!';
+                } else {
+                    const errorText = await response.text();
+                    document.getElementById('status').innerText = `File upload failed! Status: ${response.status}, Error: ${errorText}`;
+                }
+            } catch (error) {
+                document.getElementById('status').innerText = 'Error uploading file: ' + error.message;
+                console.error('Error uploading file:', error);
+            }
+        }
+    </script>
+</body>
+</html>

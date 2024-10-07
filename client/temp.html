@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>QVeriflow - Your Ultimate Data Solution</title>
+    <style>
+       
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('https://example.com/background.jpg');
+            background-size: cover;
+            color: white;
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            background-color: #4B0082;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+        .header h1 {
+            margin: 0;
+            color: white;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .company-info {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            color: white;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .company-info img {
+            vertical-align: middle;
+            margin-right: 10px;
+        }
+        .sidebar {
+            height: 100%;
+            width: 150px;
+            position: fixed;
+            top: 80px;
+            left: 0;
+            background-color: #4B0082;
+            padding-top: 10px;
+            overflow-y: auto;
+        }
+        .sidebar a {
+            padding: 8px 15px;
+            text-decoration: none;
+            font-size: 18px;
+            color: white;
+            display: block;
+        }
+        .sidebar a:hover {
+            background-color: #575757;
+        }
+        .content {
+            margin-left: 170px;
+            padding: 20px;
+        }
+        .upload-section, .about-section, .contact-section {
+            background-color: rgba(75, 0, 130, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            text-align: center;
+        }
+        .upload-section h2, .about-section h2, .contact-section h2 {
+            margin-top: 0;
+        }
+        .file-input {
+            padding: 10px;
+            margin: 10px 0;
+        }
+        .upload-btn {
+            background-color: #8A2BE2;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .upload-btn:hover {
+            background-color: #7A1BBE;
+        }
+        .loader {
+            display: none;
+            border: 8px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 8px solid #8A2BE2;
+            width: 40px;
+            height: 40px;
+            animation: spin 2s linear infinite;
+            margin: 20px auto;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .slideshow-container {
+            position: relative;
+            max-width: 100%;
+            margin: auto;
+        }
+        .slideshow-container img {
+            width: 100%;
+            display: none;
+        }
+        .active {
+            display: block;
+        }
+        .contact-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+        .contact-form {
+            width: 48%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+        }
+        .contact-form button {
+            background-color: #8A2BE2;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .contact-form button:hover {
+            background-color: #7A1BBE;
+        }
+        .contact-info {
+            width: 48%;
+            text-align: left;
+        }
+        .contact-info h3 {
+            margin-top: 0;
+        }
+        footer {
+            background-color: #4B0082;
+            color: white;
+            text-align: center;
+            padding: 5px;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+       
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="company-info">
+            <img src="https://mma.prnewswire.com/media/2448636/Quadrant_Technologies_Logo.jpg" alt="Quadrant Technologies Logo" width="180">
+        </div>
+        <h1>QVeriflow - Your Ultimate Data Solution</h1>
+    </div>
+    <div class="sidebar">
+        <a href="#home" class="active">Home</a>
+        <a href="#upload">Upload</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+    </div>
+    <div class="content">
+        <div class="slideshow-container">
+            <img src="https://th.bing.com/th/id/OIP.vTmTZkqMoQ5qwEqO7vgiGgHaD3?rs=1&pid=ImgDetMain.png" alt="Data Engineering Doodle" class="doodle active">
+            <img src="https://th.bing.com/th/id/OIP.PzPqAlaQj21QVavn-ODslAHaEK?pid=ImgDet&w=474&h=266&rs=1.png" alt="Data Engineering Doodle" class="doodle">
+        </div>
+        <!-- Upload Section -->
+        <div class="upload-section" id="upload">
+            <h2>Upload Your CSV File</h2>
+            <input type="file" id="file-input" class="file-input" accept=".csv">
+            <br>
+            <button class="upload-btn" onclick="uploadFile()">Upload to Data Lake</button>
+            <div class="loader" id="loader"></div>
+            <p id="upload-status"></p>
+        </div>
+        <!-- About Us Section -->
+        <div class="about-section" id="about">
+            <h2>About Quadrant</h2>
+            <p>Quadrant Technologies is a global provider of IT services, products, and solutions across diverse industries. We are a ‘Cloud & Data’ company involved in building and delivering managed services. Since our inception in 2004, we have been meeting the business needs of our customers more effectively while maintaining priorities for cost and security. We specialize in diverse services like Cloud, Data & Analytics, Accessibility, Business Intelligence, Quality Testing, DevOps, AI & ML, CRM, ERP, Big Data, and Application Development.</p>
+            <p>While meeting our customers’ changing needs in terms of strategy, technique, and organization management, we have a proven record of accomplishments in delivering innovative solutions and achieving the best results that exceed our customers expectations. We put our clients first - by getting to know them, building a strong & lasting partnership, and doing what is important to them.</p>
+            <h3>Our Core Values</h3>
+            <p>Quadrant Technologies is an equal-opportunity employer, and all employment decisions are based on merit and business needs. We believe that finding peace and joy in our professional journey is an invaluable part of sustainable and lasting success. This is put into effect by supplying a work environment free of discrimination and harassment.</p>
+            <p>We are passionate about achieving the highest standards of quality. Our professionals are very conversant with the latest developments and transform the project work model according to our client’s business strategy and process. Timely updates (weekly/monthly) and clients feedbacks support our team to complete the projects on time with a higher level of customer satisfaction. Our expert team also maintains trust, security, and confidentiality for all our clients. We follow strict non-disclosure policies towards client and project information.</p>
+            <h3>Our Mission</h3>
+            <p>“To be one of the fastest growing and best service-based consulting companies in the world. Using our company portfolio and diverse services and products we offer, we aim to develop the most creative, innovative, and exciting experiences for our customers by establishing a culture of exceptional execution.”</p>
+            <h3>Our Vision</h3>
+            <p>To provide best-in-class consulting and IT services by building innovative solutions that enable, empower, and enhance the user experience for achieving our business goals and objectives.</p>
+        </div>
+        <!-- Contact Section -->
+        <div class="contact-section" id="contact">
+            <div class="contact-form">
+                <h2>Contact Us</h2>
+                <input type="text" placeholder="Full Name" required>
+                <input type="email" placeholder="Email" required>
+                <input type="tel" placeholder="Mobile" required>
+                <textarea placeholder="Message" rows="4" required></textarea>
+                <button type="submit">Submit</button>
+                <p>Your details will not be shared with any third party. <a href="#" style="color: white;">Privacy Policy</a></p>
+                </div>
+                <div class="contact-info">
+                    <h3>Headquarters</h3>
+                    <p>United States of America – 5020, 148th Avenue NE, Suite-250, Redmond, WA-98052.</p>
+                    <h3>Contact Number</h3>
+                    <p>+1 (425) 296 - 1122</p>
+                    <h3>Email</h3>
+                    <p><a href="mailto:info@quadranttechnologies.com" style="color: white;">info@quadranttechnologies.com</a></p>
+                    <h3>Social</h3>
+                    <p>LinkedIn: <a href="https://www.linkedin.com/company/quadrant-technologies" style="color: white;">Quadrant Technologies</a></p>
+                </div>
+            </div>
+        </div>
+        <!-- Footer -->
+        <footer>
+            <p>2024 QVeriflow by Quadrant Technology Private Limited. All Rights Reserved.</p>
+        </footer>
+     
+        <!-- Slideshow container -->
+        <div class="slideshow-container">
+            <img src="image1.jpg" style="width:100%">
+            <img src="image2.jpg" style="width:100%">
+            <img src="image3.jpg" style="width:100%">
+        </div>
+     
+        <div>
+            <input type="file" id="file-input">
+            <button onclick="uploadFile()">Upload</button>
+            <div id="upload-status"></div>
+            <div id="loader">Uploading...</div>
+        </div>
+    </div>
+  </div>
+ 
+  <script>
+    async function uploadFile() {
+        const fileInput = document.getElementById('file-input').files[0];
+
+        if (!fileInput) {
+            alert('Please choose a file!');
+            return;
+        }
+
+        const sasToken = 'sv=2022-11-02&ss=bfqt&srt=o&sp=rwdlacupiytfx&se=2024-11-07T11:51:39Z&st=2024-10-07T03:51:39Z&spr=https&sig=1yXlrR6c53XSnAEIlNupSMRlJ9KSqP1zuT%2BbLe%2FiIVM%3D';
+        const blobServiceUrl = 'https://pracstorageac.blob.core.windows.net/praccontainer'; // Replace with your Blob service URL
+       
+        // Create blob service URL and append SAS token
+const uploadUrl = `${blobServiceUrl}/${fileInput.name}?${sasToken}`;
+        
+        try {
+            const response = await fetch(uploadUrl, {
+                method: 'PUT',
+                headers: {
+                    'x-ms-blob-type': 'BlockBlob'
+                },
+                body: fileInput
+            });
+
+            if (response.ok) {
+                document.getElementById('status').innerText = 'File uploaded successfully!';
+            } else {
+                const errorText = await response.text();
+                document.getElementById('status').innerText = `File upload failed! Status: ${response.status}, Error: ${errorText}`;
+            }
+        } catch (error) {
+            document.getElementById('status').innerText = 'Error uploading file: ' + error.message;
+            console.error('Error uploading file:', error);
+        }
+    }
+</script>
+</body>
+ 
+</html>
