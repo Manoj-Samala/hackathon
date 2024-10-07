@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/d34e6463-4e96-46c3-98c9-4526246b0aa8/resourceGroups/Hackathon/providers/Microsoft.Web/sites/myfirstwebapphack",
+    "appService.deploySubpath": "."
+}
